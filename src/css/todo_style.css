@@ -7,25 +7,30 @@
     --swatch-foundation:    #d9d6cc; /* USED FOR BODY BACKGROUND */
     --swatch-primary:       #40454e; /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
     --swatch-complement:    #353a44; /* USED IN CONTRAST BACKGROUND FOR TOOLBARS */
-    --swatch-contrast:      #111111; /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
+    --swatch-contrast:      rgb(255,255,255, 0.7); /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
     --swatch-accent:        #ffc819; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
 
     --swatch-text:          #e9edf0; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */ 
     --swatch-text-accent:   #19c8ff; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */  
 
-    --font-primary:         'Consolas', sans-serif;
+    --font-primary:         'Consolas';
 }
+body {
+    background-color: var(--swatch-foundation);
+}
+
 
 #root {
     background-color: var(--swatch-foundation);
     font-family: var(--font-primary);
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #navbar {
-    background-color: var(--swatch-complement);
-    box-shadow: 2px 2px 2px var(--swatch-primary); 
+    background-color: var(--swatch-primary);
+    box-shadow: 2px 2px 2px var(--swatch-complement); 
     color: rgb(255,200,25);
-    font-weight: bold;
+
     font-size: 18pt;
 }
 
@@ -75,6 +80,10 @@
     font-weight: bold;
 }
 
+.list-item-card:hover {
+    background-color: rgb(87, 93, 105);
+}
+
 .todo-list-button {
     cursor:pointer;
     background-color: var(--swatch-complement);
@@ -95,16 +104,19 @@
 
 .todo-button {
     cursor:pointer;
-    background-color: var(--swatch-complement);
     font-weight: bold;
 }
 
 .todo-button:hover {
-    background-color: var(--swatch-contrast);
+    background-color:var(--swatch-contrast);
 }
 
 #add-list-button {
     color: var(--swatch-accent);
+}
+
+#add-list-button:hover {
+    background-color:var(--swatch-contrast);
 }
 
 .status-incomplete {
