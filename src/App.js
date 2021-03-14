@@ -86,6 +86,21 @@ class App extends Component {
     }, this.afterToDoListsChangeComplete);
   }
 
+  deleteCurrentList = () => {
+    let listToDelete = this.state.currentList; 
+
+    //delete the current list by filtering it out using id 
+    const newToDoListsList = this.state.toDoLists.filter(testList =>
+      testList.id !== listToDelete.id
+    );
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: {items: []}
+    }, this.afterToDoListsChangeComplete);
+
+  }
+
   makeNewToDoList = () => {
     let newToDoList = {
       id: this.highListId,
@@ -123,7 +138,9 @@ class App extends Component {
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
         />
-        <Workspace toDoListItems={items} />
+        <Workspace 
+        toDoListItems={items} 
+        deleteCurrentListCallback={this.deleteCurrentList}/>
       </div>
     );
   }
