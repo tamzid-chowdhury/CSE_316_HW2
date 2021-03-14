@@ -103,7 +103,7 @@ class App extends Component {
 
   makeNewToDoList = () => {
     let newToDoList = {
-      id: this.highListId,
+      id: this.state.nextListId,
       name: 'Untitled',
       items: []
     };
@@ -134,6 +134,7 @@ class App extends Component {
       <div id="root">
         <Navbar />
         <LeftSidebar 
+          currentList={this.state.currentList}
           toDoLists={this.state.toDoLists}
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}

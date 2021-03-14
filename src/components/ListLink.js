@@ -6,12 +6,12 @@ class ListLink extends Component {
         super(props);
         
         // DISPLAY WHERE WE ARE
-        console.log("\t\t\tListLink " + this.props.toDoList.key + " constructor");
+        console.log("\t\t\tListLink " + this.props.id + " constructor");
     }
 
     componentDidMount = () => {
         // DISPLAY WHERE WE ARE
-        console.log("\t\t\tListLink " + this.props.toDoList.key + " did mount");
+        console.log("\t\t\tListLink " + this.props.id + " did mount");
     }
 
     handleLoadList = () => {
@@ -22,10 +22,15 @@ class ListLink extends Component {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tListLink render");
 
+        const highlight = this.props.currentList.id ===
+            this.props.id ? 'highlight':'no-highlight'
+
+
         return (
             <div 
                 className='todo-list-button'
                 onClick={this.handleLoadList}
+                id={highlight}
             >
                 {this.props.toDoList.name}<br />
             </div>

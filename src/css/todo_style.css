@@ -81,6 +81,14 @@
     font-weight: bold;
 }
 
+#highlight{
+    background-color: var(--swatch-accent);
+}
+
+#no-highlight{
+    
+}
+
 .todo-list-button:hover {
     background-color: var(--swatch-contrast);
 }
