@@ -40,13 +40,13 @@ body {
 }
 
 #left-sidebar-header {
-    border-bottom: dotted;
+    border-bottom: 2px dotted;
     font-size: 14pt;
     font-weight: bold;
 }
 
 #todo-list-header-card {
-    border-bottom: dotted;
+    border-bottom: 2px dotted;
     font-size: 14pt;
     font-weight: bold;
 }
