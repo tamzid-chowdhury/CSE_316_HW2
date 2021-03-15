@@ -28,12 +28,20 @@ class ListLink extends Component {
         })
     }
 
+    handleEditListName = (event) => { 
+        let newName = event.target.value
+        this.props.editListNameCallback(this.props.toDoList,newName)
+        this.setState({
+            currentlyEditingListName: false
+        })
+    }
+
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tListLink render");
 
             
-        if(this.props.currentList.id ===this.props.id){
+        if(this.props.currentList.id === this.props.id){
             if(!this.state.currentlyEditingListName){
                 return (
                     <div 
@@ -52,7 +60,9 @@ class ListLink extends Component {
                         id='highlight'
                     >
                         <input
-                            value={this.props.toDoList.name}
+                            defaultValue={this.props.toDoList.name}
+                            autoFocus
+                            onBlur={this.handleEditListName}
                         >
                         </input>
                     </div>

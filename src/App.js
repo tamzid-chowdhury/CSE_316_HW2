@@ -101,6 +101,19 @@ class App extends Component {
 
   }
 
+  editListName = (toDoList,newName) => {
+
+    
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+    newList.name = newName //change the lists name 
+    newToDoListsList.unshift(newList) //add it back into the list
+
+    this.setState({
+      toDoLists: newToDoListsList
+    })
+  }
+
   makeNewToDoList = () => {
     let newToDoList = {
       id: this.state.nextListId,
@@ -138,6 +151,7 @@ class App extends Component {
           toDoLists={this.state.toDoLists}
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
+          editListNameCallback={this.editListName}
         />
         <Workspace 
         toDoListItems={items} 
