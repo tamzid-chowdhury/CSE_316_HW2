@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
+import Task from './Task'
 
 class ToDoItem extends Component {
     constructor(props) {
@@ -27,7 +28,11 @@ class ToDoItem extends Component {
 
         return (
             <div id={'todo-list-item-' + listItem.id} className='list-item-card'>
-                <div className='item-col task-col'>{listItem.description}</div>
+                <Task 
+                    description={listItem.description}
+                    listItem={listItem}
+                    editTaskCallback={this.props.editTaskCallback}
+                />
                 <div className='item-col due-date-col'>{listItem.due_date}</div>
                 <div className={statusType}>{listItem.status}</div>
                 <div className='item-col list-controls-col'>

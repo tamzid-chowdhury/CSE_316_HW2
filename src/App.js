@@ -103,14 +103,15 @@ class App extends Component {
 
   editListName = (toDoList,newName) => {
 
-    
+
     let newToDoListsList = this.state.toDoLists //make a new list of todolists 
     let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
     newList.name = newName //change the lists name 
     newToDoListsList.unshift(newList) //add it back into the list
 
     this.setState({
-      toDoLists: newToDoListsList
+      toDoLists: newToDoListsList,
+      currentList: newList
     })
   }
 
@@ -130,6 +131,31 @@ class App extends Component {
       status: "incomplete"
     };
     return newToDoListItem;
+  }
+
+  editTask = (listItem, newTask) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    console.log(listItem)
+
+
+    
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        newList.items[i].description = newTask
+      }
+    }
+
+  
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
   }
 
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
@@ -155,7 +181,8 @@ class App extends Component {
         />
         <Workspace 
         toDoListItems={items} 
-        deleteCurrentListCallback={this.deleteCurrentList}/>
+        deleteCurrentListCallback={this.deleteCurrentList}
+        editTaskCallback={this.editTask}/>
       </div>
     );
   }
