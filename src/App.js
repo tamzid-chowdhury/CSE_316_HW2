@@ -190,6 +190,51 @@ class App extends Component {
     })
   }
 
+  moveItemUp = (listItem) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        let temp = newList.items[i]
+        newList.items[i] = newList.items[i-1]
+        newList.items[i-1] = temp
+        break
+      }
+    }
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+
+  }
+
+  moveItemDown = (listItem) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        let temp = newList.items[i]
+        newList.items[i] = newList.items[i+1]
+        newList.items[i+1] = temp
+        break
+      }
+    }
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+  }
+
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
   afterToDoListsChangeComplete = () => {
     console.log("App updated currentToDoList: " + this.state.currentList);
@@ -216,7 +261,10 @@ class App extends Component {
         deleteCurrentListCallback={this.deleteCurrentList}
         editTaskCallback={this.editTask}
         editDueDateCallback={this.editDueDate}
-        editStatusCallback={this.editStatus}/>
+        editStatusCallback={this.editStatus}
+        moveUpCallback={this.moveItemUp}
+        moveDownCallback={this.moveItemDown}
+        />
       </div>
     );
   }

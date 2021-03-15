@@ -42,7 +42,9 @@ class Workspace extends Component {
                             toDoListItem={toDoListItem} 
                             editTaskCallback={this.props.editTaskCallback} 
                             editDueDateCallback={this.props.editDueDateCallback} 
-                            editStatusCallback={this.props.editStatusCallback}   // PASS THE ITEM TO THE CHILDREN
+                            editStatusCallback={this.props.editStatusCallback} 
+                            moveUpCallback={this.props.moveUpCallback}
+                            moveDownCallback={this.props.moveDownCallback}  // PASS THE ITEM TO THE CHILDREN
                         />))
                     }
                 </div>
