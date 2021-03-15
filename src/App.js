@@ -235,6 +235,25 @@ class App extends Component {
     })
   }
 
+  deleteItem = (listItem) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        newList.items.splice(i,1)
+      }
+    }
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+  }
+
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
   afterToDoListsChangeComplete = () => {
     console.log("App updated currentToDoList: " + this.state.currentList);
@@ -264,6 +283,7 @@ class App extends Component {
         editStatusCallback={this.editStatus}
         moveUpCallback={this.moveItemUp}
         moveDownCallback={this.moveItemDown}
+        deleteItemCallback={this.deleteItem}
         />
       </div>
     );

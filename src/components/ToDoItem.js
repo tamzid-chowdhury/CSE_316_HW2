@@ -27,7 +27,12 @@ class ToDoItem extends Component {
 
     handleMoveDown = () => {
         let listItem = this.props.toDoListItem;
-        this.props.moveDownCallback(listItem)
+        this.props.moveDownCallback(listItem);
+    }
+
+    handleDeleteItem = () => {
+        let listItem = this.props.toDoListItem;
+        this.props.deleteItemCallback(listItem);
     }
 
 
@@ -59,7 +64,7 @@ class ToDoItem extends Component {
                 <div className='item-col list-controls-col'>
                     <KeyboardArrowUp className='list-item-control todo-button' onClick={this.handleMoveUp}/>
                     <KeyboardArrowDown className='list-item-control todo-button' onClick={this.handleMoveDown} />
-                    <Close className='list-item-control todo-button' />
+                    <Close className='list-item-control todo-button' onClick={this.handleDeleteItem}/>
                     <div className='list-item-control'></div>
         <div className='list-item-control'></div>
                 </div>
