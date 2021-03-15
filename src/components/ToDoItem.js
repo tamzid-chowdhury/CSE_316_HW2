@@ -4,6 +4,8 @@ import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import Close from '@material-ui/icons/Close';
 import Task from './Task'
+import DueDate from './DueDate'
+import Status from './Status'
 
 class ToDoItem extends Component {
     constructor(props) {
@@ -33,8 +35,16 @@ class ToDoItem extends Component {
                     listItem={listItem}
                     editTaskCallback={this.props.editTaskCallback}
                 />
-                <div className='item-col due-date-col'>{listItem.due_date}</div>
-                <div className={statusType}>{listItem.status}</div>
+                <DueDate 
+                    dueDate={listItem.due_date}
+                    listItem={listItem}
+                    editDueDateCallback={this.props.editDueDateCallback}
+                />
+                <Status 
+                    status={listItem.status}
+                    listItem={listItem}
+                    editStatusCallback={this.props.editStatusCallback}
+                />
                 <div className='item-col list-controls-col'>
                     <KeyboardArrowUp className='list-item-control todo-button' />
                     <KeyboardArrowDown className='list-item-control todo-button' />

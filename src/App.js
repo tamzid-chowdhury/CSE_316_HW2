@@ -137,17 +137,49 @@ class App extends Component {
     let newToDoListsList = this.state.toDoLists //make a new list of todolists 
     let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
 
-    console.log(listItem)
-
-
-    
     for(let i = 0; i < newList.items.length; i++){
       if(newList.items[i] == listItem){
         newList.items[i].description = newTask
       }
     }
 
-  
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+  }
+
+  editDueDate = (listItem, newDueDate) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        newList.items[i].due_date = newDueDate
+      }
+    }
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+  }
+
+  editStatus = (listItem, newStatus) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    for(let i = 0; i < newList.items.length; i++){
+      if(newList.items[i] == listItem){
+        newList.items[i].status = newStatus
+      }
+    }
 
     newToDoListsList.unshift(newList) //add it back into the list
 
@@ -182,7 +214,9 @@ class App extends Component {
         <Workspace 
         toDoListItems={items} 
         deleteCurrentListCallback={this.deleteCurrentList}
-        editTaskCallback={this.editTask}/>
+        editTaskCallback={this.editTask}
+        editDueDateCallback={this.editDueDate}
+        editStatusCallback={this.editStatus}/>
       </div>
     );
   }

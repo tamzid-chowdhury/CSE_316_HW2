@@ -39,7 +39,7 @@ class Task extends Component {
             return (
                     <input
                         className='item-col task-col'
-                        id='task-col-selector'
+                        id='selector'
                         defaultValue={this.props.description}
                         autoFocus
                         onBlur={this.handleEditTask}

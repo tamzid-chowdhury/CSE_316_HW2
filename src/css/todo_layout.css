@@ -111,8 +111,12 @@
     width:25%;
 }
 
-#task-col-selector {
-    width:24.3%
+#selector {
+    width:24.33%
+}
+
+#status-selector {
+    width:25%
 }
 
 .list-controls-col {
