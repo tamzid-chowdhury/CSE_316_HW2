@@ -10,10 +10,20 @@ import Close from '@material-ui/icons/Close';
 class Workspace extends Component {
     constructor(props) {
         super(props);
+
+
     }
 
     handleDeleteCurrentList = () => {
         this.props.deleteCurrentListCallback();
+    }
+
+    handleCloseCurrentList = () => {
+        this.props.closeCurrentListCallback(); 
+    }
+
+    handleAddListItem = () => {
+        this.props.addListItemCallback();
     }
 
     render() {
@@ -24,12 +34,20 @@ class Workspace extends Component {
                     <div id="date-col-header" className="item-col todo-button">Due Date</div>
                     <div id="status-col-header" className="item-col todo-button">Status</div>
                     <div className="item-col" id="todo-list-header-card-buttons">
-                        <AddBox id="add-item-button" className="list-item-control material-icons todo-button" />
+                        <AddBox 
+                            id="add-item-button" 
+                            className="list-item-control material-icons todo-button" 
+                            onClick={this.handleAddListItem} >    
+                        </AddBox>
                         <Delete 
                             id="delete-list-button" 
                             className="list-item-control material-icons todo-button"
-                            onClick={this.handleDeleteCurrentList} />
-                        <Close id="close-list-button" className="list-item-control material-icons todo-button" />
+                            onClick={this.handleOpenDeleteModal}>
+                        </Delete>
+                        <Close 
+                            id="close-list-button" 
+                            className="list-item-control material-icons todo-button" 
+                            onClick={this.handleCloseCurrentList}/>
                         <Undo id="undo-button" className="list-item-control material-icons todo-button" />
                         <Redo id="redo-button" className="list-item-control material-icons todo-button" />
                     </div>

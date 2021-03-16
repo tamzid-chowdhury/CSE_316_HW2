@@ -86,6 +86,29 @@ class App extends Component {
     }, this.afterToDoListsChangeComplete);
   }
 
+  addListItem = () => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    let newItem = this.makeNewToDoListItem()
+    newList.items.push(newItem)
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    })
+  }    
+  
+
+  closeCurrentList = () => {
+    this.setState({
+      currentList: {items: []}
+    });
+  }
+
   deleteCurrentList = () => {
     let listToDelete = this.state.currentList; 
 
@@ -127,7 +150,7 @@ class App extends Component {
   makeNewToDoListItem = () =>  {
     let newToDoListItem = {
       description: "No Description",
-      dueDate: "none",
+      due_date: "0000-00-00",
       status: "incomplete"
     };
     return newToDoListItem;
@@ -278,12 +301,14 @@ class App extends Component {
         <Workspace 
         toDoListItems={items} 
         deleteCurrentListCallback={this.deleteCurrentList}
+        closeCurrentListCallback={this.closeCurrentList}
         editTaskCallback={this.editTask}
         editDueDateCallback={this.editDueDate}
         editStatusCallback={this.editStatus}
         moveUpCallback={this.moveItemUp}
         moveDownCallback={this.moveItemDown}
         deleteItemCallback={this.deleteItem}
+        addListItemCallback={this.addListItem}
         />
       </div>
     );
