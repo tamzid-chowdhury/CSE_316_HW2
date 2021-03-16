@@ -8,8 +8,23 @@ class DeleteModal extends Component {
 
     }
 
+
     render() {
-        return
+        if (this.props.deleteModalOpen == true) {
+
+            return (
+            <div id="myModal" className="modal">
+               <div className="modal-content">
+                    <span className="close" onClick={this.props.closeDeleteModal}>&times;</span>
+                    <header id='model-title'>Delete List?</header>
+                    <div id="confirm-cancel-buttons">
+                        <div><button onClick={this.props.deleteListCallback}>Confirm</button></div>
+                        <div><button onClick={this.props.closeDeleteModal}>Cancel</button></div>
+                    </div>
+                </div>
+             </div>)
+        }
+        return null
     }
 }
 
