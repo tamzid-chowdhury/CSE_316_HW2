@@ -105,7 +105,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }    
   
 
@@ -157,7 +157,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   makeNewToDoList = () => {
@@ -194,7 +194,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   editDueDate = (listItem, newDueDate) => {
@@ -213,7 +213,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   editStatus = (listItem, newStatus) => {
@@ -232,7 +232,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   moveItemUp = (listItem) => {
@@ -254,7 +254,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
 
   }
 
@@ -277,7 +277,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   deleteItem = (listItem) => {
@@ -296,7 +296,7 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newList
-    })
+    },this.afterToDoListsChangeComplete)
   }
 
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
@@ -305,7 +305,7 @@ class App extends Component {
 
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
-    localStorage.setItem("recent_work", toDoListsString);
+    localStorage.setItem("recentLists", toDoListsString);
   }
 
   render() {
