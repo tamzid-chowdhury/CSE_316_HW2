@@ -9,6 +9,13 @@ import LeftSidebar from './components/LeftSidebar'
 import Workspace from './components/Workspace'
 import DeleteModal from './components/DeleteModal'
 
+
+//THESE ARE OUR TRANSACTIONS
+import AddNewItem_Transaction from './transactions/AddNewItem_Transaction'
+import RemoveItem_Transaction from './transactions/RemoveItem_Transaction'
+import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction'
+import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction'
+
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -76,6 +83,8 @@ class App extends Component {
       currentList: toDoList,
       currentlyEditing: true
     });
+
+    this.tps.clearAllTransactions()
   }
 
   addNewList = () => {
@@ -106,6 +115,24 @@ class App extends Component {
       toDoLists: newToDoListsList,
       currentList: newList
     },this.afterToDoListsChangeComplete)
+
+    return newItem
+  }    
+  
+  addListItemAtIndex = (listItem, index) => {
+    let newToDoListsList = this.state.toDoLists //make a new list of todolists 
+    let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+
+    newList.items.splice(index,0,listItem)
+
+    newToDoListsList.unshift(newList) //add it back into the list
+
+
+    this.setState({
+      toDoLists: newToDoListsList,
+      currentList: newList
+    },this.afterToDoListsChangeComplete)
+
   }    
   
 
@@ -283,9 +310,11 @@ class App extends Component {
   deleteItem = (listItem) => {
     let newToDoListsList = this.state.toDoLists //make a new list of todolists 
     let newList = newToDoListsList.shift() //remove the first list and assign it to a varible
+    let indexOfDeletion = -1
 
     for(let i = 0; i < newList.items.length; i++){
       if(newList.items[i] == listItem){
+        indexOfDeletion = i
         newList.items.splice(i,1)
       }
     }
@@ -297,6 +326,8 @@ class App extends Component {
       toDoLists: newToDoListsList,
       currentList: newList
     },this.afterToDoListsChangeComplete)
+
+    return indexOfDeletion
   }
 
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
@@ -305,8 +336,42 @@ class App extends Component {
 
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
-    localStorage.setItem("recentLists", toDoListsString);
+    //localStorage.setItem("recentLists", toDoListsString);
   }
+
+  undo = () => {
+    if (this.tps.hasTransactionToUndo()) {
+        this.tps.undoTransaction();
+    }
+  }
+
+  redo = () => {
+    if (this.tps.hasTransactionToRedo()) {
+        this.tps.doTransaction();
+    }
+  }
+
+  addNewItemTransaction = () => { 
+    let transaction = new AddNewItem_Transaction(this);
+    this.tps.addTransaction(transaction);
+  }
+
+  removeItemTransaction = (listItem) => { 
+    let transaction = new RemoveItem_Transaction(this,listItem);
+    this.tps.addTransaction(transaction);
+  }
+
+  moveItemUpTransaction = (listItem) => { 
+    let transaction = new MoveItemUp_Transaction(this,listItem);
+    this.tps.addTransaction(transaction);
+  }
+
+  moveItemDownTransaction = (listItem) => { 
+    let transaction = new MoveItemDown_Transaction(this,listItem);
+    this.tps.addTransaction(transaction);
+  }
+
+
 
   render() {
     let items = this.state.currentList.items;
@@ -328,10 +393,12 @@ class App extends Component {
         editTaskCallback={this.editTask}
         editDueDateCallback={this.editDueDate}
         editStatusCallback={this.editStatus}
-        moveUpCallback={this.moveItemUp}
-        moveDownCallback={this.moveItemDown}
-        deleteItemCallback={this.deleteItem}
-        addListItemCallback={this.addListItem}
+        moveUpCallback={this.moveItemUpTransaction}
+        moveDownCallback={this.moveItemDownTransaction}
+        deleteItemCallback={this.removeItemTransaction}
+        addListItemCallback={this.addNewItemTransaction}
+        undoCallback={this.undo}
+        redoCallback={this.redo}
         currentlyEditing={this.state.currentlyEditing}
         />
 
