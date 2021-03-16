@@ -15,6 +15,9 @@ import AddNewItem_Transaction from './transactions/AddNewItem_Transaction'
 import RemoveItem_Transaction from './transactions/RemoveItem_Transaction'
 import MoveItemUp_Transaction from './transactions/MoveItemUp_Transaction'
 import MoveItemDown_Transaction from './transactions/MoveItemDown_Transaction'
+import EditTask_Transaction from './transactions/EditTask_Transaction'
+import EditDueDate_Transaction from './transactions/EditDueDate_Transaction'
+import EditStatus_Transaction from './transactions/EditStatus_Transaction'
 
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
@@ -371,6 +374,23 @@ class App extends Component {
     this.tps.addTransaction(transaction);
   }
 
+  editTaskTransaction = (listItem,newTask) => { 
+    let transaction = new EditTask_Transaction(this,listItem,newTask);
+    this.tps.addTransaction(transaction);
+  }
+
+  editDueDateTransaction = (listItem,newDueDate) => { 
+    let transaction = new EditDueDate_Transaction(this,listItem,newDueDate);
+    this.tps.addTransaction(transaction);
+  }
+
+  editStatusTransaction = (listItem,newStatus) => { 
+    let transaction = new EditStatus_Transaction(this,listItem,newStatus);
+    this.tps.addTransaction(transaction);
+  }
+
+
+
 
 
   render() {
@@ -390,9 +410,9 @@ class App extends Component {
         toDoListItems={items} 
         deleteCurrentListCallback={this.openDeleteModal}
         closeCurrentListCallback={this.closeCurrentList}
-        editTaskCallback={this.editTask}
-        editDueDateCallback={this.editDueDate}
-        editStatusCallback={this.editStatus}
+        editTaskCallback={this.editTaskTransaction}
+        editDueDateCallback={this.editDueDateTransaction}
+        editStatusCallback={this.editStatusTransaction}
         moveUpCallback={this.moveItemUpTransaction}
         moveDownCallback={this.moveItemDownTransaction}
         deleteItemCallback={this.removeItemTransaction}
