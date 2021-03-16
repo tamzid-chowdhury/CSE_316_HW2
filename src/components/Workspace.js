@@ -11,7 +11,6 @@ class Workspace extends Component {
     constructor(props) {
         super(props);
 
-
     }
 
     handleDeleteCurrentList = () => {
@@ -42,7 +41,7 @@ class Workspace extends Component {
                         <Delete 
                             id="delete-list-button" 
                             className="list-item-control material-icons todo-button"
-                            onClick={this.handleOpenDeleteModal}>
+                            onClick={this.handleDeleteCurrentList}>
                         </Delete>
                         <Close 
                             id="close-list-button" 
