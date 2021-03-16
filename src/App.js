@@ -71,6 +71,7 @@ class App extends Component {
     }
   }
 
+
   // WILL LOAD THE SELECTED LIST
   loadToDoList = (toDoList) => {
     console.log("loading " + toDoList);
@@ -398,10 +399,20 @@ class App extends Component {
     return this.tps.hasTransactionToRedo();
   }
 
+  handleKeyDown = (event) => {
+    console.log(event.ctrlKey)
+    if(event.ctrlKey && event.key === 'z'){
+      this.undo()
+    }
+    if(event.ctrlKey && event.key === 'y'){
+      this.redo()
+    }
+  }
+
   render() {
     let items = this.state.currentList.items;
     return (
-      <div id="root">
+      <div id="root" onKeyDown={this.handleKeyDown} tabIndex="0">
         <Navbar />
         <LeftSidebar 
           currentList={this.state.currentList}
@@ -411,6 +422,7 @@ class App extends Component {
           editListNameCallback={this.editListName}
           currentlyEditing={this.state.currentlyEditing}
         />
+
         <Workspace 
         toDoListItems={items} 
         deleteCurrentListCallback={this.openDeleteModal}
