@@ -56,6 +56,7 @@ class App extends Component {
       nextListId: highListId+1,
       nextListItemId: highListItemId+1,
       useVerboseFeedback: true,
+      currentlyEditing: false,
       deleteModalOpen: false
     }
   }
@@ -72,7 +73,8 @@ class App extends Component {
 
     this.setState({
       toDoLists: nextLists,
-      currentList: toDoList
+      currentList: toDoList,
+      currentlyEditing: true
     });
   }
 
@@ -85,7 +87,8 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: newToDoList,
-      nextListId: this.state.nextListId+1
+      nextListId: this.state.nextListId+1,
+      currentlyEditing: true
     }, this.afterToDoListsChangeComplete);
   }
 
@@ -108,7 +111,8 @@ class App extends Component {
 
   closeCurrentList = () => {
     this.setState({
-      currentList: {items: []}
+      currentList: {items: []},
+      currentlyEditing: false
     });
   }
 
@@ -123,7 +127,8 @@ class App extends Component {
     this.setState({
       toDoLists: newToDoListsList,
       currentList: {items: []},
-      deleteModalOpen: false
+      deleteModalOpen: false,
+      currentlyEditing: false
     }, this.afterToDoListsChangeComplete);
 
   }
@@ -314,6 +319,7 @@ class App extends Component {
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
           editListNameCallback={this.editListName}
+          currentlyEditing={this.state.currentlyEditing}
         />
         <Workspace 
         toDoListItems={items} 
@@ -326,6 +332,7 @@ class App extends Component {
         moveDownCallback={this.moveItemDown}
         deleteItemCallback={this.deleteItem}
         addListItemCallback={this.addListItem}
+        currentlyEditing={this.state.currentlyEditing}
         />
 
         <DeleteModal 

@@ -18,10 +18,11 @@ class LeftSidebar extends Component {
                 <div id="left-sidebar-header" class="section-header">
                     <span class="left-sidebar-header-text">Todolists</span>
                     <span class="left-sidebar-controls" id="add-undo-redo-box">
-                        <AddBox 
-                            id="add-list-button"
+                        {!this.props.currentlyEditing ? 
+                            <AddBox id="add-list-button"
                             className="material-icons todo_button"
-                            onClick={this.handleAddNewList} />
+                            onClick={this.handleAddNewList} /> : <AddBox id='hidden-add-box'/>
+                        }
                     </span>
                 </div>
                 <div id="todo-lists-list">

@@ -33,22 +33,27 @@ class Workspace extends Component {
                     <div id="date-col-header" className="item-col todo-button">Due Date</div>
                     <div id="status-col-header" className="item-col todo-button">Status</div>
                     <div className="item-col" id="todo-list-header-card-buttons">
+                        {this.props.currentlyEditing ? 
                         <AddBox 
                             id="add-item-button" 
                             className="list-item-control material-icons todo-button" 
-                            onClick={this.handleAddListItem} >    
-                        </AddBox>
+                            onClick={this.handleAddListItem} >  
+                        </AddBox> : <div></div>}
+                        {this.props.currentlyEditing ? 
                         <Delete 
                             id="delete-list-button" 
                             className="list-item-control material-icons todo-button"
                             onClick={this.handleDeleteCurrentList}>
-                        </Delete>
+                        </Delete> : <div></div>}
+                        {this.props.currentlyEditing ? 
                         <Close 
                             id="close-list-button" 
                             className="list-item-control material-icons todo-button" 
-                            onClick={this.handleCloseCurrentList}/>
-                        <Undo id="undo-button" className="list-item-control material-icons todo-button" />
-                        <Redo id="redo-button" className="list-item-control material-icons todo-button" />
+                            onClick={this.handleCloseCurrentList}/> : <div></div>}
+                        {this.props.currentlyEditing ? 
+                        <Undo id="undo-button" className="list-item-control material-icons todo-button" /> : <div></div>}
+                        {this.props.currentlyEditing ? 
+                        <Redo id="redo-button" className="list-item-control material-icons todo-button" /> : <div></div>}
                     </div>
                 </div>
                 <div id="todo-list-items-div">
