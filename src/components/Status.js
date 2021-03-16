@@ -18,7 +18,9 @@ class Status extends Component {
 
     handleEditStatus = (event) => { 
         let newStatus = event.target.value
-        this.props.editStatusCallback(this.props.listItem,newStatus)
+        if(newStatus != this.props.status){
+            this.props.editStatusCallback(this.props.listItem,newStatus)
+        }
         this.setState({
             currentlyEditingStatus: false
         })

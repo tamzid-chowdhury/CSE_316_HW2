@@ -18,8 +18,10 @@ class DueDate extends Component {
 
     handleEditDueDate = (event) => { 
         if(event.target.value){
-            let newDueDate = event.target.value
-            this.props.editDueDateCallback(this.props.listItem,newDueDate)
+            if(event.target.value != this.props.dueDate){
+                let newDueDate = event.target.value
+                this.props.editDueDateCallback(this.props.listItem,newDueDate)
+            }
         }
         this.setState({
             currentlyEditingDueDate: false

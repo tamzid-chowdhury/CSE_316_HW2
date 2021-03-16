@@ -18,7 +18,11 @@ class Task extends Component {
 
     handleEditTask = (event) => { 
         let newTask = event.target.value
-        this.props.editTaskCallback(this.props.listItem,newTask)
+        if(newTask != this.props.description){
+            this.props.editTaskCallback(this.props.listItem,newTask)
+        }
+
+
         this.setState({
             currentlyEditingTask: false
         })
