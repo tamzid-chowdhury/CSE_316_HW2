@@ -62,6 +62,7 @@ class Workspace extends Component {
                         <ToDoItem
                             key={toDoListItem.id}
                             toDoListItem={toDoListItem} 
+                            toDoListItems={this.props.toDoListItems}
                             editTaskCallback={this.props.editTaskCallback} 
                             editDueDateCallback={this.props.editDueDateCallback} 
                             editStatusCallback={this.props.editStatusCallback} 

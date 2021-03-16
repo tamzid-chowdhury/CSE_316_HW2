@@ -39,6 +39,7 @@ class ToDoItem extends Component {
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tToDoItem render");
+        let listItems = this.props.toDoListItems; 
         let listItem = this.props.toDoListItem;
         let statusType = "status-complete";
         if (listItem.status === "incomplete")
@@ -62,8 +63,13 @@ class ToDoItem extends Component {
                     editStatusCallback={this.props.editStatusCallback}
                 />
                 <div className='item-col list-controls-col'>
-                    <KeyboardArrowUp className='list-item-control todo-button' onClick={this.handleMoveUp}/>
-                    <KeyboardArrowDown className='list-item-control todo-button' onClick={this.handleMoveDown} />
+                    {listItems[0] != listItem ?
+                    <KeyboardArrowUp className='list-item-control todo-button' onClick={this.handleMoveUp}/> : 
+                    <KeyboardArrowUp className='list-item-control todo-button' id='hidden-add-box' onClick={this.handleMoveUp}/>}
+
+                    {listItems[listItems.length-1] != listItem ?
+                    <KeyboardArrowDown className='list-item-control todo-button' onClick={this.handleMoveDown} /> :
+                    <KeyboardArrowDown className='list-item-control todo-button' id='hidden-add-box' onClick={this.handleMoveDown} />}
                     <Close className='list-item-control todo-button' onClick={this.handleDeleteItem}/>
                     <div className='list-item-control'></div>
         <div className='list-item-control'></div>
