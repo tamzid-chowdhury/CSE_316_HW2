@@ -33,6 +33,25 @@ class Workspace extends Component {
         this.props.redoCallback();
     }
 
+    renderUndo() {
+        if(this.props.hasTransactionToUndo()){
+            return <Undo id="undo-button" className="list-item-control material-icons todo-button" onClick={this.handleUndo}/>
+        }
+        else{
+            return <Undo id="undo-button-disable" className="material-icons"/>
+        }
+
+    }
+
+    renderRedo() {
+        if(this.props.hasTransactionToRedo()){
+            return <Redo id="redo-button" className="list-item-control material-icons todo-button" onClick={this.handleRedo} />
+        }
+        else{
+            return <Redo id="redo-button-disable" className="material-icons" />
+        }
+    }
+
     render() {
         return (
             <div id="workspace">
@@ -59,9 +78,9 @@ class Workspace extends Component {
                             className="list-item-control material-icons todo-button" 
                             onClick={this.handleCloseCurrentList}/> : <div></div>}
                         {this.props.currentlyEditing ? 
-                        <Undo id="undo-button" className="list-item-control material-icons todo-button" onClick={this.handleUndo}/> : <div></div>}
+                        this.renderUndo() : <div></div>}
                         {this.props.currentlyEditing ? 
-                        <Redo id="redo-button" className="list-item-control material-icons todo-button" onClick={this.handleRedo} /> : <div></div>}
+                        this.renderRedo() : <div></div>}
                     </div>
                 </div>
                 <div id="todo-list-items-div">

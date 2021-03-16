@@ -339,7 +339,7 @@ class App extends Component {
 
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
-    //localStorage.setItem("recentLists", toDoListsString);
+    localStorage.setItem("recentLists", toDoListsString);
   }
 
   undo = () => {
@@ -389,9 +389,14 @@ class App extends Component {
     this.tps.addTransaction(transaction);
   }
 
+  hasTransactionToUndo = () => {
+    return this.tps.hasTransactionToUndo();
+  }
 
 
-
+  hasTransactionToRedo = () => {
+    return this.tps.hasTransactionToRedo();
+  }
 
   render() {
     let items = this.state.currentList.items;
@@ -419,6 +424,8 @@ class App extends Component {
         addListItemCallback={this.addNewItemTransaction}
         undoCallback={this.undo}
         redoCallback={this.redo}
+        hasTransactionToUndo={this.hasTransactionToUndo}
+        hasTransactionToRedo={this.hasTransactionToRedo}
         currentlyEditing={this.state.currentlyEditing}
         />
 

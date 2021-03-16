@@ -136,3 +136,11 @@ body {
 #hidden-add-box{
     visibility: hidden;
 }
+
+#undo-button-disable{
+    color: black; 
+}
+
+#redo-button-disable{
+    color: black
+}
